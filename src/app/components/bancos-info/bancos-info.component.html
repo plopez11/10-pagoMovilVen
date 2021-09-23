@@ -1,0 +1,20 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-button (click)="onClick('')" slot="start">
+                <ion-icon color="primary" slot="start" name="arrow-back-outline"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+        <ion-title color="primary">
+            Bancos</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+    <ion-list>
+        <ion-item *ngFor="let item of bancos;let i=index" (click)="onClick(item)">
+            <ion-label>{{ item.nombre}}</ion-label>
+        </ion-item>
+    </ion-list>
+</ion-content>

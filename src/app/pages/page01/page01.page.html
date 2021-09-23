@@ -1,0 +1,91 @@
+<ion-content padding>
+    <form #formulario="ngForm" (ngSubmit)="onSubmit(formulario)">
+        <ion-list>
+            <ion-list-header>
+                <ion-label>
+                    <h1>Datos del Beneficiario</h1>
+                </ion-label>
+            </ion-list-header>
+            <ion-item>
+                <ion-label>Cedula:</ion-label>
+                <ion-input disabled={{favoritoTomado}} type="number" minlength="7" minlength="8" placeholder="Ingrese el nro de Cedula" required name="cedula" [(ngModel)]="pago.cedula" #cedula></ion-input>
+                <ion-button (click)="libroFavoritos()" color="light">
+                    <ion-icon *ngIf="!favoritoTomado" color="primary" slot="icon-only" name="people-outline"></ion-icon>
+                    <ion-icon *ngIf="favoritoTomado" color="primary" slot="icon-only" name="people"></ion-icon>
+                </ion-button>
+            </ion-item>
+            <ion-item>
+                <ion-label>Banco: {{pago.codBco}} - {{banco}}</ion-label>
+                <ion-input type="text" disabled required name="codBco" [(ngModel)]="pago.codBco" placeholder="Seleccione el Banco"></ion-input>
+                <ion-button disabled={{favoritoTomado}} name="btnSelBanco" (click)="Selbancos()" color="light">
+                    <ion-icon *ngIf="pago.codBco" color="primary" slot="icon-only" name="business"></ion-icon>
+                    <ion-icon *ngIf="!pago.codBco" color="primary" slot="icon-only" name="business-outline"></ion-icon>
+                </ion-button>
+            </ion-item>
+            <ion-item>
+                <ion-label>Telefono:</ion-label>
+                <ion-input disabled={{favoritoTomado}} type="number" minlength="11" minlength="11" placeholder="Ingrese el nro de Teléfono" required name="celular" [(ngModel)]="pago.celular"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label>Monto:</ion-label>
+                <ion-input type="number" minlength="1" pattern="^-?[0-9]*[.]?[0-9]+$" placeholder="Ingrese el Monto" required name="monto" [(ngModel)]="pago.monto"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-checkbox disabled={{favoritoTomado}} name="favorito" slot="start" [(ngModel)]="chkfavorito" (ionChange)="chkOnFav()" color="secondary"></ion-checkbox>
+                <ion-label slot="start">Agregar a Favorito</ion-label>
+            </ion-item>
+            <ion-item *ngIf="chkfavorito">
+                <ion-label>Nombre:</ion-label>
+                <ion-input type="text" minlength="3" maxlength="20" placeholder="Nombre" name="nombre" [(ngModel)]="nombre"></ion-input>
+            </ion-item>
+            <ion-grid fixed>
+                <ion-row>
+                    <ion-col size="6">
+                        <ion-button expand="block" *ngIf="mensaje.length===0" shape="round" (click)="cancelar()">
+                            <ion-icon slot="icon-only" name="refresh-outline"></ion-icon>
+                        </ion-button>
+                    </ion-col>
+                    <ion-col size="6">
+                        <ion-button expand="block" *ngIf="mensaje.length===0" shape="round" type="submit" [disabled]="formulario.invalid">
+                            <ion-icon slot="icon-only" name="enter-outline"></ion-icon>
+                        </ion-button>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </ion-list>
+        <ion-list *ngIf="mensaje">
+            <ion-list-header color="tertiary">
+                <ion-label>SMS Pago por enviar</ion-label>
+            </ion-list-header>
+            <ion-item>
+                <ion-label>{{mensaje}}</ion-label>
+            </ion-item>
+            <ion-grid fixed>
+                <ion-row>
+                    <ion-col size="12"><br></ion-col>
+                </ion-row>
+                <ion-row *ngIf="mensaje.length>10">
+                    <ion-col size="2">
+                    </ion-col>
+                    <ion-col size="3">
+                        <ion-button (click)="alerta_cancel()" [disabled]="formulario.invalid">
+                            <ion-icon slot="icon-only" name="refresh-circle-outline"></ion-icon>
+                        </ion-button>
+                    </ion-col>
+                    <ion-col size="3">
+                        <ion-button (click)="alerta_copiar()" [disabled]="formulario.invalid">
+                            <ion-icon slot="icon-only" name="copy-outline"></ion-icon>
+                        </ion-button>
+                    </ion-col>
+                    <ion-col size="3">
+                        <ion-button (click)="alerta_enviar()" [disabled]="formulario.invalid">
+                            <ion-icon slot="icon-only" name="cash-outline"></ion-icon>
+                        </ion-button>
+                    </ion-col>
+                    <ion-col size="1">
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </ion-list>
+    </form>
+</ion-content>

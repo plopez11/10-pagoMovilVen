@@ -1,0 +1,31 @@
+input:valid,
+textarea:valid {
+    background: green;
+}
+
+input:invalid,
+textarea:invalid {
+    background: red;
+}
+
+.alertDanger {
+    background-color: white;
+    color: red;
+    button {
+        color: red;
+    }
+}
+
+
+/* DOES NOT WORK - not specific enough */
+
+.alert-wrapper {
+    background: #e5e5e5;
+}
+
+
+/* Works - pass "my-custom-class" in cssClass to increase specificity */
+
+.my-custom-class .alert-wrapper {
+    background: #e5e5e5;
+}

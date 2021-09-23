@@ -1,5 +1,7 @@
 {
   "name": "pagoMoviVnzla",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }

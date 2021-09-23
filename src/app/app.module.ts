@@ -8,14 +8,22 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
+import { Page01PageModule } from './pages/page01/page01.module';
+import { SMS } from '@ionic-native/sms/ngx';
+import { Clipboard } from '@ionic-native/clipboard/ngx';
+import { IonicStorageModule } from '@ionic/storage';
+import { ComponentsModule } from './components/components.module';
 
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule],
+  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,
+     Page01PageModule, IonicStorageModule.forRoot()],
   providers: [
     StatusBar,
-    SplashScreen,
+    SplashScreen, 
+    SMS,
+    Clipboard,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]
